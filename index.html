@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Introducción conceptual y operativa a OptQuest para Arena.">
+  <meta name="theme-color" content="#ff4a1c">
+  <title>OptQuest para Arena</title>
+  <link rel="stylesheet" href="styles.css?v=5">
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <header class="deck-ui" aria-label="Controles de la presentación">
+    <button class="icon-button menu-button" id="overviewButton" type="button" aria-label="Abrir índice" title="Índice (O)"><span></span><span></span><span></span></button>
+    <div class="deck-ui__title">OPTQUEST PARA ARENA</div>
+    <div class="deck-ui__counter"><strong id="currentSlide">01</strong><span>/</span><span id="totalSlides">08</span></div>
+    <div class="deck-ui__brand"><img src="assets/ulima-logo.png" alt="Universidad de Lima"></div>
+  </header>
+
+  <main id="deck" class="deck" aria-live="polite">
+    <section class="slide slide--cover is-active" data-title="OptQuest" aria-label="Lámina 1">
+      <div class="cover-grid">
+        <div class="cover-copy">
+          <p class="eyebrow">OPTIMIZACIÓN BASADA EN SIMULACIÓN</p>
+          <h1>OPT<span>QUEST</span></h1>
+          <p class="cover-subtitle">Optimización basada en simulación</p>
+          <p class="lead">La herramienta que convierte un modelo de Arena en una búsqueda sistemática de mejores configuraciones.</p>
+          <p class="cover-author">Diego Alonso Chiang Meléndez</p>
+          <div class="cover-tags"><span>Controles</span><span>Respuestas</span><span>Restricciones</span><span>Objetivos</span></div>
+        </div>
+        <div class="cover-visual" aria-hidden="true">
+          <div class="orbit orbit--one"></div><div class="orbit orbit--two"></div><div class="orbit orbit--three"></div>
+          <div class="cover-core"><span>SIM</span><b>+</b><span>OPT</span></div>
+          <div class="cover-points"><i></i><i></i><i></i><i></i><i></i><i class="is-best"></i></div>
+          <img src="assets/ulima-logo.png" alt="" class="cover-logo">
+        </div>
+      </div>
+      <div class="cover-footer"><span>ARENA SIMULATION</span><b>×</b><span>OPTQUEST</span></div>
+    </section>
+
+    <section class="slide slide--cream" data-title="Qué es OptQuest" aria-label="Lámina 2">
+      <div class="slide-header"><span class="section-kicker">01 · DEFINICIÓN</span><h2>¿Qué es OptQuest?</h2></div>
+      <div class="definition-layout">
+        <article class="definition-main">
+          <span class="definition-label">OPTIMIZADOR</span>
+          <p>Es un complemento de Arena que selecciona valores de entrada, ejecuta el modelo y utiliza sus respuestas para orientar la búsqueda hacia configuraciones factibles y de mejor desempeño.</p>
+        </article>
+        <div class="definition-points">
+          <article><span>01</span><div><h3>Trabaja sobre el modelo</h3><p>No sustituye la simulación: la usa como función de evaluación.</p></div></article>
+          <article><span>02</span><div><h3>Automatiza la exploración</h3><p>Decide qué combinaciones evaluar y en qué orden.</p></div></article>
+          <article><span>03</span><div><h3>Respeta la formulación</h3><p>Busca dentro de rangos, condiciones y metas definidas por el usuario.</p></div></article>
+        </div>
+      </div>
+      <div class="definition-band"><strong>OptQuest decide qué probar.</strong><span>Arena estima qué ocurriría.</span></div>
+    </section>
+
+    <section class="slide slide--black" data-title="Arena y OptQuest" aria-label="Lámina 3">
+      <div class="slide-header"><span class="section-kicker">02 · ARQUITECTURA</span><h2>Dos motores, una conversación</h2></div>
+      <div class="architecture">
+        <article class="engine engine--opt">
+          <span class="engine-label">OPTQUEST</span>
+          <h3>Propone</h3>
+          <div class="control-chips"><i>x₁</i><i>x₂</i><i>x₃</i><i>…</i><i>xₙ</i></div>
+          <p>Genera una configuración dentro del espacio permitido.</p>
+        </article>
+        <div class="bridge" aria-hidden="true">
+          <span>CONTROLES</span><b>→</b><i>↻</i><b>←</b><span>RESPUESTAS</span>
+        </div>
+        <article class="engine engine--arena">
+          <span class="engine-label">ARENA</span>
+          <h3>Evalúa</h3>
+          <div class="response-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p>Ejecuta réplicas y devuelve métricas del sistema.</p>
+        </article>
+      </div>
+      <div class="architecture-note"><span>OptQuest no necesita una ecuación cerrada del sistema.</span><strong>Necesita un modelo ejecutable y respuestas medibles.</strong></div>
+    </section>
+
+    <section class="slide slide--orange" data-title="Elementos de la formulación" aria-label="Lámina 4">
+      <div class="slide-header"><span class="section-kicker section-kicker--dark">03 · FORMULACIÓN</span><h2>Los cuatro elementos de OptQuest</h2></div>
+      <div class="four-elements">
+        <article><span class="element-symbol">X</span><small>CONTROLS</small><h3>Controles</h3><p>Variables que OptQuest puede modificar. Incluyen tipo, límite inferior, valor sugerido, límite superior y paso.</p></article>
+        <article><span class="element-symbol">Y</span><small>RESPONSES</small><h3>Respuestas</h3><p>Resultados calculados por Arena que permiten evaluar cada configuración.</p></article>
+        <article><span class="element-symbol">≤</span><small>CONSTRAINTS</small><h3>Restricciones</h3><p>Condiciones que delimitan la región factible, sobre controles o respuestas.</p></article>
+        <article><span class="element-symbol">★</span><small>OBJECTIVES</small><h3>Objetivo</h3><p>Expresión que se desea minimizar o maximizar durante la búsqueda.</p></article>
+      </div>
+      <div class="formal-strip"><span>Encontrar <b>x</b></span><span>que optimice <b>f(x)</b></span><span>sujeto a <b>g(x) ≤ límite</b></span></div>
+    </section>
+
+    <section class="slide slide--black" data-title="Ciclo de búsqueda" aria-label="Lámina 5">
+      <div class="slide-header"><span class="section-kicker">04 · FUNCIONAMIENTO</span><h2>Ciclo de búsqueda</h2></div>
+      <div class="optimization-loop" id="optimizationLoop">
+        <article class="loop-step is-current"><span>01</span><h3>Variables</h3><p>OptQuest lee controles, tipos, límites y pasos.</p></article>
+        <article class="loop-step"><span>02</span><h3>Escenario</h3><p>Propone una combinación que respeta la formulación.</p></article>
+        <article class="loop-step"><span>03</span><h3>Arena simula</h3><p>El modelo ejecuta réplicas para esa combinación.</p></article>
+        <article class="loop-step"><span>04</span><h3>Respuestas</h3><p>Compara resultados con el objetivo y las restricciones.</p></article>
+        <article class="loop-step"><span>05</span><h3>Siguiente prueba</h3><p>El motor selecciona dónde continuar la búsqueda.</p></article>
+      </div>
+      <div class="cycle-summary"><span>Arena evalúa cada escenario</span><b>+</b><strong>OptQuest selecciona el siguiente</strong><span>mediante exploración, memoria, aproximación y factibilidad</span></div>
+    </section>
+
+    <section class="slide slide--cream slide--engine" data-title="Funcionamiento interno" aria-label="Lámina 6">
+      <div class="slide-header"><span class="section-kicker">05 · MOTOR</span><h2>Funcionamiento interno</h2></div>
+      <div class="engine-intro"><strong>Las técnicas no actúan como pasos lineales.</strong><span>El motor las combina para explorar, evitar repeticiones, respetar restricciones y aprender de las simulaciones.</span></div>
+      <div class="technique-grid">
+        <article><b>SS</b><h3>Scatter Search</h3><p>Combina soluciones buenas y diferentes para generar nuevas configuraciones.</p></article>
+        <article><b>TS</b><h3>Tabu Search</h3><p>Usa memoria para evitar ciclos y escapar de óptimos locales.</p></article>
+        <article><b>PL</b><h3>Programación lineal</h3><p>Organiza restricciones lineales de costo, capacidad y límites.</p></article>
+        <article><b>PE</b><h3>Programación entera</h3><p>Mantiene decisiones discretas cuando no se permiten fracciones.</p></article>
+        <article><b>NN</b><h3>Modelos predictivos</h3><p>Aprenden de corridas anteriores y priorizan zonas prometedoras.</p></article>
+        <article><b>SR</b><h3>Superficie de respuesta</h3><p>Aproxima la relación entre controles y respuestas.</p></article>
+        <article><b>EX</b><h3>Enumeración</h3><p>Evalúa todas las combinaciones cuando el espacio es pequeño.</p></article>
+        <article><b>EV</b><h3>Métodos evolutivos</h3><p>Seleccionan, combinan y modifican soluciones.</p></article>
+        <article><b>PSO</b><h3>Enjambre de partículas</h3><p>Orienta cada solución con su historial y el mejor resultado del grupo.</p></article>
+        <article><b>SPSA</b><h3>Perturbación simultánea</h3><p>Prueba cambios pequeños en varias variables aun con ruido.</p></article>
+      </div>
+      <p class="search-note">OptQuest dirige la simulación hacia configuraciones con mayor potencial, en lugar de elegir pruebas al azar.</p>
+    </section>
+
+    <section class="slide slide--orange" data-title="Restricciones y objetivos" aria-label="Lámina 7">
+      <div class="slide-header"><span class="section-kicker section-kicker--dark">06 · CONFIGURACIÓN</span><h2>Restricciones y objetivos</h2></div>
+      <div class="configuration-evidence">
+        <article class="evidence-card">
+          <div class="evidence-card__header"><span>01</span><div><small>RESTRICCIONES DE BÚSQUEDA</small><h3>Límites y paso</h3></div></div>
+          <div class="shot-crop shot-crop--bounds"><img src="assets/optquest-controls-ppt.png" alt="Tabla de controles de OptQuest con límites inferior, sugerido, superior y paso"></div>
+          <p><b>Low Bound</b> y <b>High Bound</b> delimitan los valores permitidos. <b>Step</b> define el incremento entre alternativas.</p>
+          <div class="evidence-result">OptQuest propone valores dentro del dominio definido</div>
+        </article>
+        <article class="evidence-card">
+          <div class="evidence-card__header"><span>02</span><div><small>FUNCIÓN OBJETIVO</small><h3>Meta y expresión</h3></div></div>
+          <div class="shot-crop shot-crop--objectives"><img src="assets/optquest-objectives-ppt.png" alt="Resumen de objetivos de OptQuest con tipo, meta y expresión"></div>
+          <p><b>Goal</b> indica si el motor maximiza o minimiza. <b>Expression</b> vincula el objetivo con las respuestas del modelo.</p>
+          <div class="evidence-result">Cada corrida recibe un valor que permite ordenar soluciones</div>
+        </article>
+      </div>
+      <div class="decision-check"><span>1 · PROPONER DENTRO DE LÍMITES</span><b>→</b><span>2 · SIMULAR</span><b>→</b><span>3 · VALIDAR RESTRICCIONES</span><b>→</b><strong>4 · COMPARAR EL OBJETIVO</strong></div>
+    </section>
+
+    <section class="slide slide--black slide--closing" data-title="Buenas prácticas" aria-label="Lámina 8">
+      <div class="slide-header"><span class="section-kicker">07 · CIERRE</span><h2>OptQuest encuentra.<br>El analista valida.</h2></div>
+      <div class="closing-grid">
+        <div class="practice-list">
+          <article><span>01</span><p>Validar el modelo de Arena antes de optimizar.</p></article>
+          <article><span>02</span><p>Definir rangos y pasos coherentes con el sistema.</p></article>
+          <article><span>03</span><p>Usar suficientes réplicas para controlar el ruido.</p></article>
+          <article><span>04</span><p>Confirmar las mejores soluciones con mayor precisión.</p></article>
+          <article><span>05</span><p>Interpretar “mejor encontrada”, no “verdad absoluta”.</p></article>
+        </div>
+        <div class="sources-panel">
+          <img src="assets/ulima-logo.png" alt="Universidad de Lima">
+          <span>FUENTES OFICIALES</span>
+          <a href="https://literature.rockwellautomation.com/idc/groups/literature/documents/pp/aropt-pp001_-en-p.pdf" target="_blank" rel="noreferrer"><b>01</b> OptQuest for Arena · Product Profile</a>
+          <a href="https://www.rockwellautomation.com/en-sg/products/software/arena-simulation/buying-options.html" target="_blank" rel="noreferrer"><b>02</b> Arena · Buying options</a>
+          <a href="https://www.rockwellautomation.com/en-sg/products/software/arena-simulation/support/frequently-asked-questions.html" target="_blank" rel="noreferrer"><b>03</b> Arena · Frequently asked questions</a>
+        </div>
+      </div>
+      <div class="closing-message">Una buena optimización comienza con una buena formulación.</div>
+    </section>
+  </main>
+
+  <nav class="deck-nav" aria-label="Navegación entre láminas"><button class="nav-button" id="prevButton" type="button" aria-label="Lámina anterior">←</button><button class="nav-button nav-button--primary" id="nextButton" type="button" aria-label="Lámina siguiente">→</button></nav>
+  <button class="help-button" id="helpButton" type="button" aria-label="Mostrar ayuda" title="Ayuda (?)">?</button>
+
+  <dialog class="overview-dialog" id="overviewDialog"><div class="dialog-header"><div><span>ÍNDICE</span><h2>OptQuest para Arena</h2></div><button class="dialog-close" type="button" data-close="overviewDialog" aria-label="Cerrar">×</button></div><div class="overview-grid" id="overviewGrid"></div></dialog>
+  <dialog class="help-dialog" id="helpDialog"><div class="dialog-header"><div><span>ATAJOS</span><h2>Control de la presentación</h2></div><button class="dialog-close" type="button" data-close="helpDialog" aria-label="Cerrar">×</button></div><div class="shortcut-grid"><span><kbd>→</kbd><kbd>Espacio</kbd> avanzar</span><span><kbd>←</kbd> retroceder</span><span><kbd>O</kbd> abrir índice</span><span><kbd>F</kbd> pantalla completa</span><span><kbd>Inicio</kbd> primera lámina</span><span><kbd>Fin</kbd> última lámina</span></div></dialog>
+  <script src="script.js?v=3"></script>
+</body>
+</html>
